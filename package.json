@@ -1,0 +1,30 @@
+{
+  "name": "touche",
+  "version": "0.0.0",
+  "description": "Create new file.",
+  "main": "touche.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volkovasystems/touche.git"
+  },
+  "keywords": [
+    "create",
+    "new",
+    "file",
+    "touch",
+    "touche"
+  ],
+  "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volkovasystems/touche/issues"
+  },
+  "homepage": "https://github.com/volkovasystems/touche#readme",
+  "dependencies": {
+    "letgo": "0.0.3",
+    "zelf": "0.0.4"
+  }
+}
