@@ -45,6 +45,7 @@
 
 	@include:
 		{
+			"falzy": "falzy",
 			"fs": "fs",
 			"letgo": "letgo",
 			"zelf": "zelf"
@@ -52,9 +53,11 @@
 	@end-include
 */
 
-var fs = require( "fs" );
-var letgo = require( "letgo" );
-var zelf = require( "zelf" );
+const falzy = require( "falzy" );
+const fs = require( "fs" );
+const letgo = require( "letgo" );
+const protype = require( "protype" );
+const zelf = require( "zelf" );
 
 var touche = function touche( path, synchronous ){
 	/*;
@@ -66,7 +69,7 @@ var touche = function touche( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( typeof path != "string" || !path ){
+	if( falzy( path ) || !protype( path, STRING ) ){
 		throw new Error( "invalid path" );
 	}
 
@@ -77,34 +80,36 @@ var touche = function touche( path, synchronous ){
 			return true;
 
 		}catch( error ){
-			throw new Error( "error creating file, " + error.message );
+			throw new Error( `cannot create file, ${ error }` );
 		}
 
 	}else{
 		var self = zelf( this );
 
-		var catcher = letgo.bind( self )( );
+		var catcher = letgo.bind( self )( function later( cache ){
+			fs.open( path, "a",
+				function done( error, descriptor ){
+					if( error ){
+						error = new Error( `error creating file, ${ error }` );
 
-		fs.open( path, "a",
-			function onOpenFile( error, descriptor ){
-				if( error ){
-					error = new Error( "error creating file, " + error.message );
+						cache.callback( error, false );
 
-					catcher.cache.callback( error, false );
+					}else{
+						fs.close( descriptor, function done( error ){
+							if( error ){
+								error = new Error( `error creating file, ${ error }` );
 
-				}else{
-					fs.close( descriptor, function onCloseFile( error ){
-						if( error ){
-							error = new Error( "error creating file, " + error.message );
+								cache.callback( error, false );
 
-							catcher.cache.callback( error, false );
+							}else{
+								cache.callback( null, true );
+							}
+						} );
+					}
 
-						}else{
-							catcher.cache.callback( null, true );
-						}
-					} );
-				}
-			} );
+					catcher.release( );
+				} );
+		} );
 
 		return catcher;
 	}
