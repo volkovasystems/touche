@@ -1,10 +1,10 @@
 {
   "name": "touche",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create new file.",
   "main": "touche.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha touche-test.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/volkovasystems/touche#readme",
   "dependencies": {
-    "falzy": "^0.10.0",
-    "letgo": "^0.17.0",
-    "protype": "^0.11.0",
-    "zelf": "^0.6.0"
+    "falzy": "^0.13.0",
+    "letgo": "^0.19.0",
+    "protype": "^0.17.0",
+    "zelf": "^0.8.0"
   }
 }
