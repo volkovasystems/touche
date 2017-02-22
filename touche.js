@@ -3,7 +3,7 @@
 		The MIT License (MIT)
 		@mit-license
 
-		Copyright (@c) 2016 Richeve Siodina Bebedor
+		Copyright (@c) 2017 Richeve Siodina Bebedor
 		@email: richeve.bebedor@gmail.com
 
 		Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,6 +32,9 @@
 			"file": "touche.js",
 			"module": "touche",
 			"author": "Richeve S. Bebedor",
+			"contributors": [
+				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+			],
 			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com:volkovasystems/touche.git",
 			"test": "touche-test.js",
@@ -59,7 +62,7 @@ const letgo = require( "letgo" );
 const protype = require( "protype" );
 const zelf = require( "zelf" );
 
-var touche = function touche( path, synchronous ){
+const touche = function touche( path, synchronous ){
 	/*;
 		@meta-configuration:
 			{
@@ -80,24 +83,24 @@ var touche = function touche( path, synchronous ){
 			return true;
 
 		}catch( error ){
-			throw new Error( `cannot create file, ${ error }` );
+			throw new Error( `cannot create file, ${ error.stack }` );
 		}
 
 	}else{
-		var self = zelf( this );
+		let self = zelf( this );
 
-		var catcher = letgo.bind( self )( function later( cache ){
+		let catcher = letgo.bind( self )( function later( cache ){
 			fs.open( path, "a",
 				function done( error, descriptor ){
 					if( error ){
-						error = new Error( `error creating file, ${ error }` );
+						error = new Error( `error creating file, ${ error.stack }` );
 
 						cache.callback( error, false );
 
 					}else{
 						fs.close( descriptor, function done( error ){
 							if( error ){
-								error = new Error( `error creating file, ${ error }` );
+								error = new Error( `error creating file, ${ error.stack }` );
 
 								cache.callback( error, false );
 
