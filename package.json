@@ -1,6 +1,6 @@
 {
   "name": "touche",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Create new file.",
   "main": "touche.js",
   "scripts": {
@@ -18,15 +18,18 @@
     "touche"
   ],
   "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "contributors": [
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/volkovasystems/touche/issues"
   },
   "homepage": "https://github.com/volkovasystems/touche#readme",
   "dependencies": {
-    "falzy": "^0.13.0",
-    "letgo": "^0.19.0",
-    "protype": "^0.17.0",
-    "zelf": "^0.8.0"
+    "falzy": "^0.16.0",
+    "letgo": "^0.21.0",
+    "protype": "^0.20.0",
+    "zelf": "^0.10.0"
   }
 }
