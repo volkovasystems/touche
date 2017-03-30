@@ -51,6 +51,7 @@
 			"falzy": "falzy",
 			"fs": "fs",
 			"letgo": "letgo",
+			"protype": "protype",
 			"zelf": "zelf"
 		}
 	@end-include
