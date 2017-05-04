@@ -1,7 +1,10 @@
+const assert = require( "assert" );
 const touche = require( "./touche.js" );
 
-touche( "hello.world", true );
+assert.ok( touche( "hello.world", true ) );
 
 touche( "yeah.world" )( function done( ){
 	console.log( arguments );
 } );
+
+console.log( "ok" );
