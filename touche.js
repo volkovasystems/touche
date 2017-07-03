@@ -32,10 +32,10 @@
 			"file": "touche.js",
 			"module": "touche",
 			"author": "Richeve S. Bebedor",
+			"eMail": "richeve.bebedor@gmail.com",
 			"contributors": [
 				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
 			],
-			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com:volkovasystems/touche.git",
 			"test": "touche-test.js",
 			"global": true
@@ -90,28 +90,27 @@ const touche = function touche( path, synchronous ){
 	}else{
 		let self = zelf( this );
 
-		let catcher = letgo.bind( self )( function later( cache ){
+		let catcher = letgo.bind( self )( function later( callback ){
 			fs.open( path, "a",
 				function done( error, descriptor ){
 					if( error ){
 						error = new Error( `error creating file, ${ error.stack }` );
 
-						cache.callback( error, false );
+						callback( error, false );
 
 					}else{
 						fs.close( descriptor, function done( error ){
 							if( error ){
 								error = new Error( `error creating file, ${ error.stack }` );
 
-								cache.callback( error, false );
+								callback( error, false );
 
 							}else{
-								cache.callback( null, true );
+								callback( null, true );
 							}
 						} );
 					}
 
-					catcher.release( );
 				} );
 		} );
 
