@@ -1,10 +1,10 @@
 const assert = require( "assert" );
 const touche = require( "./touche.js" );
 
-assert.ok( touche( "hello.world", true ) );
+assert.equal( touche( "hello.world", true ), true, "should be true" );
 
 touche( "yeah.world" )( function done( ){
-	console.log( arguments );
+	assert.equal( arguments[ 1 ], true, "should be true" );
 } );
 
 console.log( "ok" );
