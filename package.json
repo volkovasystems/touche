@@ -1,6 +1,6 @@
 {
   "name": "touche",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Create new file.",
   "main": "touche.js",
   "scripts": {
@@ -29,7 +29,6 @@
   "dependencies": {
     "falzy": "^0.20.0",
     "letgo": "^0.52.0",
-    "protype": "^0.22.0",
     "zelf": "^0.12.0"
   }
 }

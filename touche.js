@@ -51,7 +51,6 @@
 			"falzy": "falzy",
 			"fs": "fs",
 			"letgo": "letgo",
-			"protype": "protype",
 			"zelf": "zelf"
 		}
 	@end-include
@@ -60,7 +59,6 @@
 const falzy = require( "falzy" );
 const fs = require( "fs" );
 const letgo = require( "letgo" );
-const protype = require( "protype" );
 const zelf = require( "zelf" );
 
 const touche = function touche( path, synchronous ){
@@ -73,11 +71,11 @@ const touche = function touche( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( falzy( path ) || !protype( path, STRING ) ){
+	if( falzy( path ) || typeof path != "string" ){
 		throw new Error( "invalid path" );
 	}
 
-	if( synchronous ){
+	if( synchronous === true ){
 		try{
 			fs.closeSync( fs.openSync( path, "a" ) );
 
@@ -88,30 +86,22 @@ const touche = function touche( path, synchronous ){
 		}
 
 	}else{
-		let self = zelf( this );
+		let catcher = letgo.bind( zelf( this ) )( function later( callback ){
+			fs.open( path, "a", function done( error, descriptor ){
+				if( error instanceof Error ){
+					callback( new Error( `cannot create file, ${ error.stack }` ), false );
 
-		let catcher = letgo.bind( self )( function later( callback ){
-			fs.open( path, "a",
-				function done( error, descriptor ){
-					if( error ){
-						error = new Error( `error creating file, ${ error.stack }` );
+				}else{
+					fs.close( descriptor, function done( error ){
+						if( error instanceof Error ){
+							callback( new Error( `cannot create file, ${ error.stack }` ), false );
 
-						callback( error, false );
-
-					}else{
-						fs.close( descriptor, function done( error ){
-							if( error ){
-								error = new Error( `error creating file, ${ error.stack }` );
-
-								callback( error, false );
-
-							}else{
-								callback( null, true );
-							}
-						} );
-					}
-
-				} );
+						}else{
+							callback( null, true );
+						}
+					} );
+				}
+			} );
 		} );
 
 		return catcher;

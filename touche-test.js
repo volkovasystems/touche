@@ -1,10 +1,15 @@
 const assert = require( "assert" );
+const fs = require( "fs" );
 const touche = require( "./touche.js" );
 
-assert.equal( touche( "hello.world", true ), true, "should be true" );
+assert.equal( touche( "test.txt", true ), true, "should be true" );
 
-touche( "yeah.world" )( function done( ){
-	assert.equal( arguments[ 1 ], true, "should be true" );
+fs.unlinkSync( "test.txt" );
+
+touche( "test.txt" )( function done( error, result ){
+	assert.equal( result, true, "should be true" );
+
+	fs.unlinkSync( "test.txt" );
 } );
 
 console.log( "ok" );
